@@ -8,80 +8,141 @@
 
         /* STYLE FOR THE INPUT FIELD */
         #charInput1 {
-
+        align-items: center;
+        margin-top: 20px;
         }
 
         #charInput2 {
-
+        align-items: center;
+        margin-top: 20px;
         }
 
         /* STYLE FOR THE SUBMIT BUTTON */
         #submitButton {
-
+        cursor: pointer;
+        text-align: center;
+        background-color: rgb(97, 149, 186);
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
         }
 
         /* STYLE FOR THE IMAGE */
         #displayedImage {
             display: none; /* This line is mandatory */
+            width: 500px;
+            height: 400px;
+            padding-left: 15%;
+            padding-right: 35%;
+            padding-top: 33%;
+            overflow: hidden;
         }
+
+        body {
+            background-color: black;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        p{
+            color: aliceblue;
+            font-size: 16px;
+        }
+
+        h1{
+            font-size: 40px;
+            color:  rgb(226, 242, 255);
+            font-weight: bold;
+        }
+
+        h2{ 
+            font-size: 37px;
+            color: rgb(226, 242, 255);
+            font-weight: bold;
+        
+        }
+
+        .left{
+            text-align: left;
+            padding-top: 35%;
+            padding-left: 10%;
+        }
+
+        .right {
+            text-align: left; 
+            padding-left: 15%;
+            padding-right: 10%;
+        }
+
+        #text {
+            padding-top: 53%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 
-    
-    <!-- INPUT FIELD FOR 1 CHARACTER -->
-    <input type="text" id="charInput1" maxlength="1">
-    <input type="text" id="charInput2" maxlength="1">
+    <div class="left">
+        <h1>Harold Edgerton</h1>
+        <h2>The man who froze time</h2>
+        <!-- INPUT FIELD FOR 1 CHARACTER -->
+        <input type="text" id="charInput1" maxlength="1">
+        <input type="text" id="charInput2" maxlength="1">
+        <!-- BUTTON TO DISPLAY IMAGE -->
+        <button onclick="displayImage()" id="submitButton">Show Image</button>
+    </div>  
 
-    <!-- BUTTON TO DISPLAY IMAGE -->
-    <button onclick="displayImage()" id="submitButton">Show Image</button>
-
-    <!-- IMAGE TO DISPLAY -->
-    <img id="displayedImage" src="" alt="Displayed Image">
-
+    <div class="right">
+        <p id="text"> Harold Edgerton was born in Fremont, Nebraska, and he received a BS in electrical engineering from the University of Nebraska.Edgerton revolutionized photography, science, military surveillance, Hollywood filmmaking, and the media through his invention of the strobe light in the early 1930s. The photographs that resulted from his scientific experiments were championed in the 1930s as representative of the New Objectivity, the American counterpart to the German Neue Sachlichkeit. Edgerton's photography of split-second motion may be seen as an expansion beyond the nineteenth-century locomotion studies of by Eadweard Muybridge and Étienne-Jules Marey. </p>
+        <!-- IMAGE TO DISPLAY -->
+        <img id="displayedImage" src="" alt="Displayed Image">
+    </div>
 
     <!-- Image Display Script Below -->
     <script>
 
         function displayImage() {
             const imgElement = document.getElementById("displayedImage");
+            const vowels = ["A", "E", "I", "O","U"]; 
 
             //Letter
             const input1_letter = document.getElementById("charInput1").value.toUpperCase();
             const input2_letter = document.getElementById("charInput2").value.toUpperCase();
             
+            
             //Number
             const input1_number = input1_letter.charCodeAt(0); //Converts the letter to a number (https://www.ascii-code.com); For instance, 'A' is 65 in ASCII
             const input2_number = input2_letter.charCodeAt(0); //Converts the letter to a number (https://www.ascii-code.com); For instance, 'A' is 65 in ASCII
 
-            //HINTS
-            //HINT 1: You can compare strings with comparison operators and boolean operators
-            //COMPARISON & LOGICAL OPERATORS: https://www.w3schools.com/js/js_comparisons.asp
-            if(input1_letter === "A" && input2_letter !== "B") { //If input1_letter equals A AND input2_letter does not equal B, then show this image
-                imgElement.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWx2NnlvN3RocHVya2d3cXB5b2V0bXRqNXhyMGZkZG4wd3Zpdm13NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o75ajIFH0QnQC3nCeD/giphy.gif"
+            const isInput1Vowel = vowels.includes(input1_letter);
+            const isInput2Vowel = vowels.includes(input2_letter);
+
+            text.classList.add("hidden");
+
+            if (isInput1Vowel && isInput2Vowel){
+                imgElement.src = "images/1.jpg";
                 imgElement.style.display = "block";
             }
 
-
-            //HINT 2: Assign an image based numerical values
-            if(input1_number == 67 && input2_number == 68) { //If input1_number is 67 (C) AND input2_number is 68 (D), then show this image
-                imgElement.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWx2NnlvN3RocHVya2d3cXB5b2V0bXRqNXhyMGZkZG4wd3Zpdm13NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o75ajIFH0QnQC3nCeD/giphy.gif"
-                imgElement.style.display = "block";
-            } 
-
-
-            //HINT 3: You can perform simple math operations on the variables
-            //Arithmetic: https://www.w3schools.com/js/js_arithmetic.asp
-            let mymathresult = input1_number - input2_number;
-            console.log(mymathresult); //Console is a way to show a value in the console inspector
-
-            if(mymathresult < 1) { //If mymathresult is less than 1, then show this image
-                imgElement.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWx2NnlvN3RocHVya2d3cXB5b2V0bXRqNXhyMGZkZG4wd3Zpdm13NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o75ajIFH0QnQC3nCeD/giphy.gif"
+            if (!isInput1Vowel && !isInput2Vowel) {
+                imgElement.src = "images/2.jpg";
                 imgElement.style.display = "block";
             }
 
-            //Remember to use if else statements to capture error conditions
+            if (!isInput1Vowel && isInput2Vowel) {
+                imgElement.src = "images/3.jpg";
+                imgElement.style.display = "block";
+            }
 
+            if (isInput1Vowel && !isInput2Vowel) {
+                imgElement.src = "images/4.jpg";
+                imgElement.style.display = "block";
+            }
         }
     </script>
 
